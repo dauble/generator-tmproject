@@ -12,6 +12,7 @@ This is a project generator to quick start a new web project. This Yeoman genera
 1. Create an empty directory for your project: `$ mkdir ~/Sites/my_new_project && cd $_`
 2. Run the generator: `$ yo tmproject`
 
+## Project directories
 You will be asked a couple basic questions to start your project up. When you are done you should have a project directory that looks like this:
 
 ```
