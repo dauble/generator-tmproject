@@ -1,0 +1,40 @@
+{
+  "name": "generator-tmproject",
+  "version": "0.0.1",
+  "description": "A generator to bootstrap simple web projects with Yeoman",
+  "keywords": [
+    "yeoman-tmproject"
+  ],
+  "homepage": "https://github.com/aaronbushnell/generator-tmproject",
+  "bugs": "https://github.com/aaronbushnell/generator-tmproject/issues",
+  "author": {
+    "name": "Aaron Bushnell",
+    "url": "https://github.com/aaronbushnell"
+  },
+  "main": "app/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/aaronbushnell/generator-tmproject.git"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "yeoman-generator": "~0.13.0"
+  },
+  "devDependencies": {
+    "mocha": "~1.12.0"
+  },
+  "peerDependencies": {
+    "yo": ">=1.0.0-rc.1"
+  },
+  "engines": {
+    "node": ">=0.8.0",
+    "npm": ">=1.2.10"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ]
+}
