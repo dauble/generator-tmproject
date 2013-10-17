@@ -38,6 +38,7 @@ package.json
 ### bower_components/
 [Bower](http://bower.io) will manage your project dependencies. If you run jQuery, Fancybox, Flexsider or any other libraries this is where they'll live.
 
+#### Adding libraries to your project
 If you need to add Fancybox to your project you can search the Bower library for it by running `$ bower search fancybox`. Once you find the one you are looking for, just run `$ bower install fancybox -S` and the Fancybox library will now be in `app/bower_components`. You can also remove a dependency by running `$ bower uninstall fancybox -S`.
 
 **Note:** You must use `-S` in your bower command to add the dependency to your `bower.json` file.
