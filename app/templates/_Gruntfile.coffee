@@ -130,6 +130,12 @@ module.exports = (grunt) ->
       options:
         assetsDirs: '<%%= yeoman.dist %>'
 
+    notify:
+      dist:
+        options:
+          title: "Build complete"
+          message: "Grunt has finished compiling your build in /<%%= yeoman.dist %>/"
+
   grunt.loadNpmTasks "grunt-contrib-watch"
   grunt.loadNpmTasks "grunt-contrib-compass"
   grunt.loadNpmTasks "grunt-contrib-coffee"
@@ -142,6 +148,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-contrib-concat"
   grunt.loadNpmTasks "grunt-contrib-imagemin"
   grunt.loadNpmTasks "grunt-svgmin"
+  grunt.loadNpmTasks "grunt-notify"
 
   grunt.registerTask "build", [
     "clean",
@@ -157,7 +164,8 @@ module.exports = (grunt) ->
     "imagemin",
     "svgmin",
     "rev",
-    "usemin"
+    "usemin",
+    "notify:dist"
   ]
 
   grunt.registerTask "default", [
