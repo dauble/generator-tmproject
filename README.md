@@ -30,7 +30,7 @@ You will be asked a couple basic questions to start your project up. When you ar
 .gitignore
 .htaccess
 bower.json
-Gruntfile.js
+Gruntfile.coffee
 package.json
 ```
 
