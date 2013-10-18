@@ -73,3 +73,6 @@ This is the compiled version of your web project. You deploy this, and only this
 - `.htaccess`: A basic htaccess file provided by the [HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate/blob/master/.htaccess).
 - `Gruntfile.js`: A list of the tasks that run on `$ grunt` and `$ grunt build`
 - `package.json`: A list of dependencies for the Grunt tasks.
+
+## Release History
+* 2013-10-18   v1.0.1   Use a CoffeeScript Gruntfile so it is easier to read
