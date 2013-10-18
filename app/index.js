@@ -70,7 +70,7 @@ TmprojectGenerator.prototype.app = function app() {
   // Project essentials
   this.copy('_htaccess', '.htaccess');
   this.copy('_package.json', 'package.json');
-  this.copy('_Gruntfile.js', 'Gruntfile.js');
+  this.copy('_Gruntfile.coffee', 'Gruntfile.coffee');
 
   if (this.projectTypeBasic) {
     this.copy('_index.html', 'app/index.html');
