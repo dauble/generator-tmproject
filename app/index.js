@@ -74,6 +74,12 @@ TmprojectGenerator.prototype.app = function app() {
 
   if (this.projectTypeBasic) {
     this.copy('_index.html', 'app/index.html');
+  } else if (this.projectTypeCraft) {
+    this.mkdir('app/craft/templates');
+    this.copy('_index.html', 'app/craft/templates/index.html');
+  } else if (this.projectTypeEE) {
+    this.mkdir('app/templates/default_site/site.group');
+    this.copy('_index.html', 'app/templates/default_site/site.group/index.html');
   }
 
   // Assets
