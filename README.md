@@ -54,16 +54,16 @@ Place any project images in this directory. Running `$ grunt build` will move yo
 You are able to use `.js` and `.coffee` files. If you are running the `$ grunt` process, you may want to restart it when creating new files.
 
 #### Paths
-If you want to reference a `.js` or `.coffee` file in your template you *must* use `_compiled` in your path. For example, if your `.js` file is located at `javascripts/form/myfile.js` your HTML should be `<script src="/javascripts/_compiled/form/myfile.js"></script>`.
+If you want to reference a `.js` or `.coffee` file in your template you *must* use `_compiled` in your path. For example, if your `.js` file is located at `javascripts/form/myfile.js` your HTML should be `<script src="/_compiled/javascripts/form/myfile.js"></script>`.
 
 #### Using CoffeeScript
-CoffeeScript files must be referenced with a `.js` extension. For example, if your CoffeeScript file is located at `javascripts/form/myfile.coffee` your HTML should be `<script src="/javascripts/_compiled/form/myfile.js"></script>`.
+CoffeeScript files must be referenced with a `.js` extension. For example, if your CoffeeScript file is located at `javascripts/form/myfile.coffee` your HTML should be `<script src="/_compiled/javascripts/form/myfile.js"></script>`.
 
 ### stylesheets/
 You are able to use `.scss` and `.css` files (though I'd recommend just using `.scss`). If you are running the `$ grunt` process, you may want to restart it when creating new files.
 
 #### Paths
-If you want to reference a `.scss` or `.css` file in your template you *must* use `_compiled` in your path. For example, if your `.scss` file is located at `stylesheets/myfile.scss` your HTML should be `<link rel="stylesheet" href="/stylesheets/_compiled/myfile.css">`.
+If you want to reference a `.scss` or `.css` file in your template you *must* use `_compiled` in your path. For example, if your `.scss` file is located at `stylesheets/myfile.scss` your HTML should be `<link rel="stylesheet" href="/_compiled/stylesheets/myfile.css">`.
 
 ### dist/
 This is the compiled version of your web project. You deploy this, and only this, folder to the web server.
@@ -75,6 +75,7 @@ This is the compiled version of your web project. You deploy this, and only this
 - `package.json`: A list of dependencies for the Grunt tasks.
 
 ## Release History
+* 2013-10-25 - v1.0.4 - Fixes issue where compiled CSS/JS compiles infinitely
 * 2013-10-25 - v1.0.3 - Fixes usemin issues with ExpressionEngine and Craft options
 * 2013-10-18 - v1.0.2 - Add notify script to notify when a build is complete
 * 2013-10-18 - v1.0.1 - Use a CoffeeScript Gruntfile so it is easier to read

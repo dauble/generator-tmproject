@@ -13,7 +13,7 @@ module.exports = (grunt) ->
     compass:
       options:
         sassDir: '<%%= yeoman.app %>/stylesheets'
-        cssDir: '<%%= yeoman.app %>/stylesheets/_compiled'
+        cssDir: '<%%= yeoman.app %>/_compiled/stylesheets'
         relativeAssets: false
         assetCacheBuster: false
         require: 'breakpoint'
@@ -24,7 +24,7 @@ module.exports = (grunt) ->
         expand: true
         cwd: '<%%= yeoman.app %>/javascripts'
         src: '{,*/}*.coffee'
-        dest: '<%%= yeoman.app %>/javascripts/_compiled'
+        dest: '<%%= yeoman.app %>/_compiled/javascripts'
         ext: '.js'
 
     imagemin:
@@ -47,10 +47,7 @@ module.exports = (grunt) ->
         tasks: ['compass:dist']
 
       css:
-        files: [
-          '<%%= yeoman.app %>/stylesheets/{,*/}*.css',
-          '!<%%= yeoman.app %>/stylesheets/_compiled/*.css'
-        ]
+        files: ['<%%= yeoman.app %>/stylesheets/{,*/}*.css']
         tasks: ['copy:css']
 
       coffee:
@@ -63,7 +60,7 @@ module.exports = (grunt) ->
 
       livereload:
         options: livereload: true
-        files: ['<%%= yeoman.app %>/stylesheets/_compiled/*.css']
+        files: ['<%%= yeoman.app %>/_compiled/stylesheets/*.css']
 
     copy:
       dist:
@@ -71,6 +68,7 @@ module.exports = (grunt) ->
         cwd: '<%%= yeoman.app %>'
         src: [
             '**',
+            '!**/_compiled/**',
             '!**/stylesheets/**',
             '!**/javascripts/**',
             '!**/bower_components/**',
@@ -82,13 +80,13 @@ module.exports = (grunt) ->
         expand: true
         cwd: '<%%= yeoman.app %>/stylesheets/'
         src: ['**/*.css']
-        dest: '<%%= yeoman.app %>/stylesheets/_compiled/'
+        dest: '<%%= yeoman.app %>/_compiled/stylesheets/'
 
       js:
         expand: true
         cwd: '<%%= yeoman.app %>/javascripts/'
         src: ['**/*.js']
-        dest: '<%%= yeoman.app %>/javascripts/_compiled/'
+        dest: '<%%= yeoman.app %>/_compiled/javascripts/'
 
     clean:
       dist:
@@ -102,8 +100,8 @@ module.exports = (grunt) ->
       dev:
         dot: true
         src: [
-          '<%%= yeoman.app %>/javascripts/_compiled',
-          '<%%= yeoman.app %>/stylesheets/_compiled'
+          '<%%= yeoman.app %>/_compiled/javascripts',
+          '<%%= yeoman.app %>/_compiled/stylesheets'
         ]
 
     rev:
