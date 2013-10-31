@@ -75,7 +75,8 @@ This is the compiled version of your web project. You deploy this, and only this
 - `package.json`: A list of dependencies for the Grunt tasks.
 
 ## Release History
-* 2013-10-25 - v1.0.4 - Fixes issue where compiled CSS/JS compiles infinitely
+* 2013-10-30 - v1.0.5 - Remove .tmp directory after build is complete
+* 2013-10-29 - v1.0.4 - Fixes issue where compiled CSS/JS compiles infinitely
 * 2013-10-25 - v1.0.3 - Fixes usemin issues with ExpressionEngine and Craft options
 * 2013-10-18 - v1.0.2 - Add notify script to notify when a build is complete
 * 2013-10-18 - v1.0.1 - Use a CoffeeScript Gruntfile so it is easier to read

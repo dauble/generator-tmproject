@@ -104,6 +104,12 @@ module.exports = (grunt) ->
           '<%%= yeoman.app %>/_compiled/stylesheets'
         ]
 
+      tmp:
+        dot: true
+        src: [
+          '.tmp'
+        ]
+
     rev:
       dist:
         files:
@@ -149,7 +155,8 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-notify"
 
   grunt.registerTask "build", [
-    "clean",
+    "clean:dist",
+    "clean:dev",
     "copy:css",
     "copy:js",
     "useminPrepare",
@@ -163,6 +170,7 @@ module.exports = (grunt) ->
     "svgmin",
     "rev",
     "usemin",
+    "clean:tmp"
     "notify:dist"
   ]
 
