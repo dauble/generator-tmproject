@@ -68,7 +68,7 @@ TmprojectGenerator.prototype.bowerJs = function bowerJs() {
 
 TmprojectGenerator.prototype.app = function app() {
   // Project essentials
-  this.copy('_htaccess', '.htaccess');
+  this.copy('_htaccess', 'app/.htaccess');
   this.copy('_package.json', 'package.json');
   this.copy('_Gruntfile.coffee', 'Gruntfile.coffee');
 
