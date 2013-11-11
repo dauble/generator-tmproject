@@ -21,14 +21,16 @@ You will be asked a couple basic questions to start your project up. When you ar
   + images/
   + javascripts/
   + stylesheets/
+  .htaccess
   index.html
 + dist
   + javascripts/
+  + images/
   + stylesheets/
+  .htaccess
   index.html
 .bowerrc
 .gitignore
-.htaccess
 bower.json
 Gruntfile.coffee
 package.json
@@ -75,6 +77,7 @@ This is the compiled version of your web project. You deploy this, and only this
 - `package.json`: A list of dependencies for the Grunt tasks.
 
 ## Release History
+* 2013-11-11 - v1.0.6 - Fixes issue where .htaccess wasn't in app/ and didn't copy to dist/
 * 2013-10-30 - v1.0.5 - Remove .tmp directory after build is complete
 * 2013-10-29 - v1.0.4 - Fixes issue where compiled CSS/JS compiles infinitely
 * 2013-10-25 - v1.0.3 - Fixes usemin issues with ExpressionEngine and Craft options
