@@ -30,15 +30,15 @@ module.exports = (grunt) ->
     imagemin:
       dist:
         expand: true
-        cwd: '<%%= yeoman.app %>/images'
-        src: '{,*/}*.{png,jpg,jpeg}'
+        cwd: '<%%= yeoman.dist %>/images'
+        src: '**/*.{png,jpg,jpeg}'
         dest: '<%%= yeoman.dist %>/images'
 
     svgmin:
       dist:
         expand: true
-        cwd: '<%%= yeoman.app %>/images'
-        src: '{,*/}*.svg'
+        cwd: '<%%= yeoman.dist %>/images'
+        src: '**/*.svg'
         dest: '<%%= yeoman.dist %>/images'
 
     watch:
@@ -72,8 +72,7 @@ module.exports = (grunt) ->
             '!**/_compiled/**',
             '!**/stylesheets/**',
             '!**/javascripts/**',
-            '!**/bower_components/**',
-            'images/**/*.gif'
+            '!**/bower_components/**'
         ]
         dest: '<%%= yeoman.dist %>'
 
