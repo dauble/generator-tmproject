@@ -65,6 +65,7 @@ module.exports = (grunt) ->
     copy:
       dist:
         expand: true
+        dot: true
         cwd: '<%%= yeoman.app %>'
         src: [
             '**',
