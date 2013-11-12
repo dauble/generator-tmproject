@@ -3,10 +3,14 @@ generator-tmproject
 
 This is a project generator to quick start a new web project. This Yeoman generator will set up your directories and provide you with two Grunt tasks: `$ grunt` for development and `$ grunt build` to compile your project.
 
+## Requirements
+* [Bundler](http://bundler.io/) `$ gem install bundler`
+* [node.js](http://nodejs.org/)
+* [Grunt](http://gruntjs.com/) `$ npm install -g grunt-cli`
+* [Yeoman](http://yeoman.io/) `$ npm install -g yo`
+
 ## Installing generator-tmproject
-1. [Install Node](http://nodejs.org/) (if you haven't already)
-2. Install Yeoman: `$ npm install -g yo`
-3. Install generator-tmproject: `$ npm install -g generator-tmproject`
+Run `$ npm install -g generator-tmproject`
 
 ## Setup a new project
 1. Create an empty directory for your project: `$ mkdir ~/Sites/my_new_project && cd $_`
@@ -32,6 +36,7 @@ You will be asked a couple basic questions to start your project up. When you ar
 .bowerrc
 .gitignore
 bower.json
+Gemfile
 Gruntfile.coffee
 package.json
 ```
@@ -73,10 +78,12 @@ This is the compiled version of your web project. You deploy this, and only this
 ### Miscellaneous files
 - `.gitignore`: A standard gitignore file to ignore compiled directories and other OS-based files and folders.
 - `.htaccess`: A basic htaccess file provided by the [HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate/blob/master/.htaccess).
+- `Gemfile`: A list of Ruby gem dependencies for the project
 - `Gruntfile.js`: A list of the tasks that run on `$ grunt` and `$ grunt build`
 - `package.json`: A list of dependencies for the Grunt tasks.
 
 ## Release History
+* 2013-11-11 - v1.1.0 - Adds bundle functionality to retreive gem dependencies
 * 2013-11-11 - v1.0.7 - Fixes issue where all files in images/ may not be compressed and copied over
 * 2013-11-11 - v1.0.6 - Fixes issue where .htaccess wasn't in app/ and didn't copy to dist/
 * 2013-10-30 - v1.0.5 - Remove .tmp directory after build is complete

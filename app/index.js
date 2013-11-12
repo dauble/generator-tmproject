@@ -10,7 +10,12 @@ var TmprojectGenerator = module.exports = function TmprojectGenerator(args, opti
     this.installDependencies({
       skipInstall: options['skip-install'],
       callback: function () {
-        this.spawnCommand('grunt', ['build']);
+        // Run bundle install to ensure we have all gem dependencies
+        this.spawnCommand('bundle', ['install'])
+          .on('exit', function() {
+            // Run grunt build for the first time
+            this.spawnCommand('grunt', ['build'])
+          }.bind(this));
       }.bind(this) // bind the callback to the parent scope
     });
   });
@@ -71,6 +76,7 @@ TmprojectGenerator.prototype.app = function app() {
   this.copy('_htaccess', 'app/.htaccess');
   this.copy('_package.json', 'package.json');
   this.copy('_Gruntfile.coffee', 'Gruntfile.coffee');
+  this.copy('_Gemfile', 'Gemfile');
 
   if (this.projectTypeBasic) {
     this.copy('_index.html', 'app/index.html');
