@@ -72,10 +72,10 @@ module.exports = (grunt) ->
         dot: true
         cwd: '<%%= yeoman.app %>'
         src: [
-            '**',
-            '!**/_compiled/**',
-            '!**/stylesheets/**',
-            '!**/javascripts/**',
+            '**'
+            '!**/_compiled/**'
+            '!**/stylesheets/**'
+            '!**/javascripts/**'
             '!**/bower_components/**'
         ]
         dest: '<%%= yeoman.dist %>'
@@ -104,15 +104,15 @@ module.exports = (grunt) ->
       dist:
         dot: true
         src: [
-          '.tmp',
-          '<%%= yeoman.dist %>/*',
+          '.tmp'
+          '<%%= yeoman.dist %>/*'
           '!<%%= yeoman.dist %>/.git*'
         ]
 
       dev:
         dot: true
         src: [
-          '<%%= yeoman.app %>/_compiled/javascripts',
+          '<%%= yeoman.app %>/_compiled/javascripts'
           '<%%= yeoman.app %>/_compiled/stylesheets'
         ]
 
@@ -126,7 +126,7 @@ module.exports = (grunt) ->
       dist:
         files:
           src: [
-            '<%%= yeoman.dist %>/stylesheets/{,*/}*.css',
+            '<%%= yeoman.dist %>/stylesheets/{,*/}*.css'
             '<%%= yeoman.dist %>/javascripts/{,*/}*.js'
           ]
 
@@ -204,35 +204,35 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-contrib-handlebars"
 
   grunt.registerTask "build", [
-    "clean:dist",
-    "clean:dev",
-    "copy:css",
-    "copy:js",
-    "useminPrepare",
-    "compass",
-    "coffee",
+    "clean:dist"
+    "clean:dev"
+    "copy:css"
+    "copy:js"
+    "useminPrepare"
+    "compass"
+    "coffee"
     "handlebars"
-    "concat",
-    "cssmin",
-    "copy:dist",
-    "imagemin",
-    "svgmin",
+    "concat"
+    "cssmin"
+    "copy:dist"
+    "imagemin"
+    "svgmin"
     "requirejs"
     "copy:requirejs"
     "uglify"
     "replace:dist"
-    "rev",
-    "usemin",
+    "rev"
+    "usemin"
     "clean:tmp"
     "notify:dist"
   ]
 
   grunt.registerTask "default", [
-    "clean:dev",
-    "copy:css",
-    "copy:js",
-    "compass",
-    "coffee",
+    "clean:dev"
+    "copy:css"
+    "copy:js"
+    "compass"
+    "coffee"
     "handlebars"
     "watch"
   ]
