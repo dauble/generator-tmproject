@@ -61,9 +61,7 @@ module.exports = (grunt) ->
         tasks: ['copy:js']
 
       handlebars:
-        files: [
-          '<%%= yeoman.app %>/javascripts/templates/{,*/}*.hbs'
-        ]
+        files: ['<%%= yeoman.app %>/javascripts/templates/{,*/}*.hbs']
         tasks: ['handlebars']
 
       livereload:
