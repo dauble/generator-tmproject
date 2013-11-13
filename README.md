@@ -83,6 +83,7 @@ This is the compiled version of your web project. You deploy this, and only this
 - `package.json`: A list of dependencies for the Grunt tasks.
 
 ## Release History
+* 2013-11-13 - v1.2.0 - Add RequireJS and Handlebars.js functionality (shout out to @drgfunk)
 * 2013-11-11 - v1.1.0 - Adds bundle functionality to retreive gem dependencies
 * 2013-11-11 - v1.0.7 - Fixes issue where all files in images/ may not be compressed and copied over
 * 2013-11-11 - v1.0.6 - Fixes issue where .htaccess wasn't in app/ and didn't copy to dist/
