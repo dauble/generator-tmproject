@@ -44,7 +44,7 @@ module.exports = (grunt) ->
     watch:
       scss:
         files: ['<%%= yeoman.app %>/stylesheets/{,*/}*.{scss,sass}']
-        tasks: ['compass:dist']
+        tasks: ['compass:dist', 'notify:scss']
 
       css:
         files: ['<%%= yeoman.app %>/stylesheets/{,*/}*.css']
@@ -52,7 +52,7 @@ module.exports = (grunt) ->
 
       coffee:
         files: ['<%%= yeoman.app %>/javascripts/{,*/}*.coffee']
-        tasks: ['coffee:dist','notify:coffee']
+        tasks: ['coffee:dist', 'notify:coffee']
 
       js:
         files: ['<%%= yeoman.app %>/javascripts/{,*/}*.js']
@@ -147,14 +147,18 @@ module.exports = (grunt) ->
         assetsDirs: '<%%= yeoman.dist %>'
 
     notify:
+      scss:
+        options:
+          title: 'Sass compiled'
+          message: 'Grunt successfully compiled your Sass files'
       coffee:
         options:
-          title: 'Task: Coffee complete'
-          message: 'Grunt has finished compiling your coffee scripts'
+          title: 'CoffeeScript compiled'
+          message: 'Grunt successfully compiled your CoffeeScript files'
       dist:
         options:
           title: "Build complete"
-          message: "Grunt has finished compiling your build in /<%%= yeoman.dist %>/"
+          message: "Grunt successfully compiled your build in /<%%= yeoman.dist %>/"
 
     handlebars:
       compile:
