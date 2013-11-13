@@ -2,6 +2,8 @@ module.exports = (grunt) ->
 
   require("time-grunt") grunt
 
+# my change
+
   grunt.initConfig
     yeoman:
       app: 'app'
@@ -52,11 +54,17 @@ module.exports = (grunt) ->
 
       coffee:
         files: ['<%%= yeoman.app %>/javascripts/{,*/}*.coffee']
-        tasks: ['coffee:dist']
+        tasks: ['coffee:dist','notify:coffee']
 
       js:
         files: ['<%%= yeoman.app %>/javascripts/{,*/}*.js']
         tasks: ['copy:js']
+
+      handlebars:
+        files: [
+          '<%%= yeoman.app %>/javascripts/templates/{,*/}*.hbs'
+        ]
+        tasks: ['handlebars']
 
       livereload:
         options: livereload: true
@@ -75,6 +83,15 @@ module.exports = (grunt) ->
             'images/**/*.gif'
         ]
         dest: '<%%= yeoman.dist %>'
+
+      requirejs:
+        expand: true
+        cwd: '<%%= yeoman.app %>/bower_components'
+        src: [
+          'requirejs/require.js'
+          'modernizr/modernizr.js'
+        ]
+        dest: '<%%= yeoman.dist %>/bower_components'
 
       css:
         expand: true
@@ -135,10 +152,44 @@ module.exports = (grunt) ->
         assetsDirs: '<%%= yeoman.dist %>'
 
     notify:
+      coffee:
+        options:
+          title: 'Task: Coffee complete'
+          message: 'Grunt has finished compiling your coffee scripts'
       dist:
         options:
           title: "Build complete"
           message: "Grunt has finished compiling your build in /<%%= yeoman.dist %>/"
+
+    handlebars:
+      compile:
+        options:
+          namespace: 'Templates'
+          amd: true
+        files:
+          '<%%= yeoman.app %>/_compiled/javascripts/templates/templates.js': ['<%%= yeoman.app %>/javascripts/templates/{,*/}*.hbs']
+    requirejs:
+      compile:
+        options:
+          baseUrl: "<%%= yeoman.app %>/_compiled/javascripts"
+          mainConfigFile: "<%%= yeoman.app %>/_compiled/javascripts/config.js"
+          dir: '<%%= yeoman.dist %>/javascripts'
+          modules: [{ name: 'main' }]
+          removeCombined: true
+
+    replace:
+      dist:
+        options:
+          patterns: [
+            match: '/\/_compiled\/javascripts\//g'
+            replacement: '/javascripts/'
+            expression: true
+          ]
+        files: [
+          expand: true
+          src: '<%%= yeoman.dist %>/<%%= yeoman.wrapper %>'
+          dest: '.'
+        ]
 
   grunt.loadNpmTasks "grunt-contrib-watch"
   grunt.loadNpmTasks "grunt-contrib-compass"
@@ -147,12 +198,15 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-contrib-clean"
   grunt.loadNpmTasks "grunt-contrib-cssmin"
   grunt.loadNpmTasks "grunt-contrib-uglify"
+  grunt.loadNpmTasks "grunt-contrib-requirejs"
   grunt.loadNpmTasks "grunt-rev"
   grunt.loadNpmTasks "grunt-usemin"
   grunt.loadNpmTasks "grunt-contrib-concat"
   grunt.loadNpmTasks "grunt-contrib-imagemin"
   grunt.loadNpmTasks "grunt-svgmin"
   grunt.loadNpmTasks "grunt-notify"
+  grunt.loadNpmTasks "grunt-replace"
+  grunt.loadNpmTasks "grunt-contrib-handlebars"
 
   grunt.registerTask "build", [
     "clean:dist",
@@ -162,12 +216,15 @@ module.exports = (grunt) ->
     "useminPrepare",
     "compass",
     "coffee",
+    "handlebars"
     "concat",
     "cssmin",
-    "uglify",
     "copy:dist",
     "imagemin",
     "svgmin",
+    "requirejs"
+    "copy:requirejs"
+    "replace:dist"
     "rev",
     "usemin",
     "clean:tmp"
@@ -180,5 +237,6 @@ module.exports = (grunt) ->
     "copy:js",
     "compass",
     "coffee",
+    "handlebars"
     "watch"
   ]
