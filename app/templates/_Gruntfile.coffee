@@ -2,8 +2,6 @@ module.exports = (grunt) ->
 
   require("time-grunt") grunt
 
-# my change
-
   grunt.initConfig
     yeoman:
       app: 'app'
