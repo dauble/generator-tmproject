@@ -85,7 +85,6 @@ module.exports = (grunt) ->
         cwd: '<%%= yeoman.app %>/bower_components'
         src: [
           'requirejs/require.js'
-          'modernizr/modernizr.js'
         ]
         dest: '<%%= yeoman.dist %>/bower_components'
 
@@ -220,6 +219,7 @@ module.exports = (grunt) ->
     "svgmin",
     "requirejs"
     "copy:requirejs"
+    "uglify"
     "replace:dist"
     "rev",
     "usemin",
