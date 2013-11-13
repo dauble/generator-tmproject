@@ -138,7 +138,10 @@ module.exports = (grunt) ->
 
     concat: {}
 
-    uglify: {}
+    uglify:
+      requirejs:
+        files:
+          '<%%= yeoman.dist %>/bower_components/requirejs/require.js': ['<%%= yeoman.dist %>/bower_components/requirejs/require.js']
 
     usemin:
       html: ['<%%= yeoman.dist %>/<%%= yeoman.wrapper %>']
@@ -167,6 +170,7 @@ module.exports = (grunt) ->
           amd: true
         files:
           '<%%= yeoman.app %>/_compiled/javascripts/templates/templates.js': ['<%%= yeoman.app %>/javascripts/templates/{,*/}*.hbs']
+
     requirejs:
       compile:
         options:
