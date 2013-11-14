@@ -90,6 +90,7 @@ module.exports = (grunt) ->
         files: [
           '<%%= yeoman.app %>/_compiled/stylesheets/{,*/}*.css'
           '<%%= yeoman.app %>/_compiled/javascripts/{,*/}*.js'
+          '<%%= yeoman.app %>/images/**/*.{gif,jpeg,jpg,png,svg,webp}'
         ]
 
     copy:

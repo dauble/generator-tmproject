@@ -1,6 +1,6 @@
 {
   "name": "generator-tmproject",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "A generator to bootstrap simple web projects with Yeoman",
   "keywords": [
     "yeoman-tmproject"
