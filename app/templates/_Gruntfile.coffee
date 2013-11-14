@@ -23,7 +23,10 @@ module.exports = (grunt) ->
       dist: {}
 
     concurrent:
-      compile: ['compass:dev', 'watch']
+      compile: [
+        'compass:dev'
+        'watch'
+      ]
 
     coffee:
       dist:
@@ -59,22 +62,35 @@ module.exports = (grunt) ->
         tasks: ['copy:css']
 
       coffee:
+        options:
+          spawn: false
         files: ['<%%= yeoman.app %>/javascripts/{,*/}*.coffee']
-        tasks: ['coffee:dist', 'notify:coffee']
+        tasks: [
+          'coffee:dist'
+          'notify:coffee'
+        ]
 
       js:
         files: ['<%%= yeoman.app %>/javascripts/{,*/}*.js']
         tasks: ['copy:js']
 
       handlebars:
+        options:
+          spawn: false
         files: ['<%%= yeoman.app %>/javascripts/templates/{,*/}*.hbs']
-        tasks: ['handlebars', 'notify:handlebars']
+        tasks: [
+          'handlebars'
+          'notify:handlebars'
+        ]
 
       livereload:
         options:
           livereload: true
           spawn: false
-        files: ['<%%= yeoman.app %>/_compiled/stylesheets/{,*/}*.css']
+        files: [
+          '<%%= yeoman.app %>/_compiled/stylesheets/{,*/}*.css'
+          '<%%= yeoman.app %>/_compiled/javascripts/{,*/}*.js'
+        ]
 
     copy:
       dist:
@@ -93,9 +109,7 @@ module.exports = (grunt) ->
       requirejs:
         expand: true
         cwd: '<%%= yeoman.app %>/bower_components'
-        src: [
-          'requirejs/require.js'
-        ]
+        src: ['requirejs/require.js']
         dest: '<%%= yeoman.dist %>/bower_components'
 
       css:
