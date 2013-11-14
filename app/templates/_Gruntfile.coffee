@@ -17,7 +17,13 @@ module.exports = (grunt) ->
         relativeAssets: false
         assetCacheBuster: false
         require: 'breakpoint'
+      dev:
+        options:
+          watch: true
       dist: {}
+
+    concurrent:
+      compile: ['compass:dev', 'watch']
 
     coffee:
       dist:
@@ -43,8 +49,10 @@ module.exports = (grunt) ->
 
     watch:
       scss:
-        files: ['<%%= yeoman.app %>/stylesheets/{,*/}*.{scss,sass}']
-        tasks: ['compass:dist', 'notify:scss']
+        options:
+          spawn: false
+        files: ['<%%= yeoman.app %>/stylesheets/{,*/}*.scss']
+        tasks: ['notify:scss']
 
       css:
         files: ['<%%= yeoman.app %>/stylesheets/{,*/}*.css']
@@ -60,11 +68,13 @@ module.exports = (grunt) ->
 
       handlebars:
         files: ['<%%= yeoman.app %>/javascripts/templates/{,*/}*.hbs']
-        tasks: ['handlebars']
+        tasks: ['handlebars', 'notify:handlebars']
 
       livereload:
-        options: livereload: true
-        files: ['<%%= yeoman.app %>/_compiled/stylesheets/*.css']
+        options:
+          livereload: true
+          spawn: false
+        files: ['<%%= yeoman.app %>/_compiled/stylesheets/{,*/}*.css']
 
     copy:
       dist:
@@ -158,6 +168,10 @@ module.exports = (grunt) ->
         options:
           title: 'CoffeeScript compiled'
           message: 'Grunt successfully compiled your CoffeeScript files'
+      handlebars:
+        options:
+          title: 'Handlebars compiled'
+          message: 'Grunt successfully compiled your Handlebar files'
       dist:
         options:
           title: "Build complete"
@@ -210,6 +224,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-notify"
   grunt.loadNpmTasks "grunt-replace"
   grunt.loadNpmTasks "grunt-contrib-handlebars"
+  grunt.loadNpmTasks "grunt-concurrent"
 
   grunt.registerTask "build", [
     "clean:dist"
@@ -217,7 +232,7 @@ module.exports = (grunt) ->
     "copy:css"
     "copy:js"
     "useminPrepare"
-    "compass"
+    "compass:dist"
     "coffee"
     "handlebars"
     "concat"
@@ -239,8 +254,8 @@ module.exports = (grunt) ->
     "clean:dev"
     "copy:css"
     "copy:js"
-    "compass"
+    "compass:dist"
     "coffee"
     "handlebars"
-    "watch"
+    "concurrent"
   ]
