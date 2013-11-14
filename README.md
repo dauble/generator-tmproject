@@ -83,6 +83,7 @@ This is the compiled version of your web project. You deploy this, and only this
 - `package.json`: A list of dependencies for the Grunt tasks.
 
 ## Release History
+* 2013-11-14 - v1.2.3 - Use MatchDep to automatically match dependencies
 * 2013-11-14 - v1.2.2 - Drastically speed up .scss compiling and LiveReload using Concurrent
 * 2013-11-13 - v1.2.1 - Minify RequireJS
 * 2013-11-13 - v1.2.0 - Add RequireJS and Handlebars.js functionality (shout out to @drgfunk)

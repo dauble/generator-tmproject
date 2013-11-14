@@ -208,23 +208,7 @@ module.exports = (grunt) ->
           dest: '.'
         ]
 
-  grunt.loadNpmTasks "grunt-contrib-watch"
-  grunt.loadNpmTasks "grunt-contrib-compass"
-  grunt.loadNpmTasks "grunt-contrib-coffee"
-  grunt.loadNpmTasks "grunt-contrib-copy"
-  grunt.loadNpmTasks "grunt-contrib-clean"
-  grunt.loadNpmTasks "grunt-contrib-cssmin"
-  grunt.loadNpmTasks "grunt-contrib-uglify"
-  grunt.loadNpmTasks "grunt-contrib-requirejs"
-  grunt.loadNpmTasks "grunt-rev"
-  grunt.loadNpmTasks "grunt-usemin"
-  grunt.loadNpmTasks "grunt-contrib-concat"
-  grunt.loadNpmTasks "grunt-contrib-imagemin"
-  grunt.loadNpmTasks "grunt-svgmin"
-  grunt.loadNpmTasks "grunt-notify"
-  grunt.loadNpmTasks "grunt-replace"
-  grunt.loadNpmTasks "grunt-contrib-handlebars"
-  grunt.loadNpmTasks "grunt-concurrent"
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
   grunt.registerTask "build", [
     "clean:dist"
