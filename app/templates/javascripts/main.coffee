@@ -1,2 +1,2 @@
-require ['config', 'App'], (config, App) ->
+require ['config', 'app'], (config, App) ->
     App.start()
