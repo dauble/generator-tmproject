@@ -20,7 +20,9 @@ module.exports = (grunt) ->
       dev:
         options:
           watch: true
-      dist: {}
+      dist:
+        options:
+          force: true
 
     concurrent:
       compile: [

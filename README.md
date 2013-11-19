@@ -83,6 +83,7 @@ This is the compiled version of your web project. You deploy this, and only this
 - `package.json`: A list of dependencies for the Grunt tasks.
 
 ## Release History
+* 2013-11-14 - v1.2.6 - Change Compass dist action to recompile from scratch
 * 2013-11-14 - v1.2.5 - Setup images to use LiveReload
 * 2013-11-14 - v1.2.4 - Setup JavaScript and CoffeeScript to use LiveReload
 * 2013-11-14 - v1.2.3 - Use MatchDep to automatically match dependencies
