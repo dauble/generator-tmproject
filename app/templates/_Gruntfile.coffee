@@ -225,6 +225,14 @@ module.exports = (grunt) ->
           dest: '.'
         ]
 
+    modernizr:
+      devFile: '<%%= yeoman.app %>/bower_components/modernizr/modernizr.js'
+      outputFile: '<%%= yeoman.dist %>/bower_components/modernizr/modernizr.js'
+      files: [
+        '<%%= yeoman.dist %>/javascripts/{,*/}*.js'
+        '<%%= yeoman.dist %>/stylesheets/{,*/}*.css'
+      ]
+
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
   grunt.registerTask "build", [
@@ -245,6 +253,7 @@ module.exports = (grunt) ->
     "copy:requirejs"
     "uglify"
     "replace:dist"
+    "modernizr"
     "rev"
     "usemin"
     "clean:tmp"

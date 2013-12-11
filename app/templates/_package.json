@@ -22,6 +22,7 @@
     "grunt-contrib-handlebars": "~0.5.11",
     "grunt-replace": "~0.5.1",
     "grunt-concurrent": "~0.4.1",
+    "grunt-modernizr": "~0.4.1",
     "matchdep": "~0.3.0"
   }
 }
