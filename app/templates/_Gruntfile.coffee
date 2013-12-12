@@ -1,5 +1,6 @@
 module.exports = (grunt) ->
 
+  require('load-grunt-tasks') grunt
   require("time-grunt") grunt
 
   grunt.initConfig
@@ -10,12 +11,20 @@ module.exports = (grunt) ->
       wrapper: 'craft/templates/{,*/}*.html'<% } else { %>
       wrapper: '{,*/}*.html'<% } %>
 
+    concurrent:
+      dev: [
+        'watch'
+        'compass:dev'
+      ]
+      dist: [
+        'imagemin'
+        'svgmin'
+      ]
+
     compass:
       options:
         sassDir: '<%%= yeoman.app %>/stylesheets'
-        cssDir: '<%%= yeoman.app %>/_compiled/stylesheets'
-        relativeAssets: false
-        assetCacheBuster: false
+        cssDir: '<%%= yeoman.app %>/.tmp/stylesheets'
         require: 'breakpoint'
       dev:
         options:
@@ -24,33 +33,13 @@ module.exports = (grunt) ->
         options:
           force: true
 
-    concurrent:
-      compile: [
-        'compass:dev'
-        'watch'
-      ]
-
     coffee:
       dist:
         expand: true
         cwd: '<%%= yeoman.app %>/javascripts'
         src: '{,*/}*.coffee'
-        dest: '<%%= yeoman.app %>/_compiled/javascripts'
+        dest: '<%%= yeoman.app %>/.tmp/javascripts'
         ext: '.js'
-
-    imagemin:
-      dist:
-        expand: true
-        cwd: '<%%= yeoman.dist %>/images'
-        src: '**/*.{png,jpg,jpeg}'
-        dest: '<%%= yeoman.dist %>/images'
-
-    svgmin:
-      dist:
-        expand: true
-        cwd: '<%%= yeoman.dist %>/images'
-        src: '**/*.svg'
-        dest: '<%%= yeoman.dist %>/images'
 
     watch:
       scss:
@@ -59,18 +48,14 @@ module.exports = (grunt) ->
         files: ['<%%= yeoman.app %>/stylesheets/{,*/}*.scss']
         tasks: ['notify:scss']
 
-      css:
-        files: ['<%%= yeoman.app %>/stylesheets/{,*/}*.css']
-        tasks: ['copy:css']
-
       coffee:
         options:
-          spawn: false
-        files: ['<%%= yeoman.app %>/javascripts/{,*/}*.coffee']
-        tasks: [
-          'coffee:dist'
-          'notify:coffee'
-        ]
+            spawn: false
+          files: ['<%%= yeoman.app %>/javascripts/{,*/}*.coffee']
+          tasks: [
+            'coffee:dist'
+            'notify:coffee'
+          ]
 
       js:
         files: ['<%%= yeoman.app %>/javascripts/{,*/}*.js']
@@ -90,72 +75,10 @@ module.exports = (grunt) ->
           livereload: true
           spawn: false
         files: [
-          '<%%= yeoman.app %>/_compiled/stylesheets/{,*/}*.css'
-          '<%%= yeoman.app %>/_compiled/javascripts/{,*/}*.js'
-          '<%%= yeoman.app %>/images/**/*.{gif,jpeg,jpg,png,svg,webp}'
+          '<%%= yeoman.app %>/.tmp/stylesheets/{,*/}*.css'
+          '<%%= yeoman.app %>/.tmp/javascripts/{,*/}*.js'
+          '<%%= yeoman.app %>/images/{,*/}*.{gif,jpeg,jpg,png,svg,webp}'
         ]
-
-    copy:
-      dist:
-        expand: true
-        dot: true
-        cwd: '<%%= yeoman.app %>'
-        src: [
-            '**'
-            '!**/_compiled/**'
-            '!**/stylesheets/**'
-            '!**/javascripts/**'
-            '!**/bower_components/**'
-        ]
-        dest: '<%%= yeoman.dist %>'
-
-      requirejs:
-        expand: true
-        cwd: '<%%= yeoman.app %>/bower_components'
-        src: ['requirejs/require.js']
-        dest: '<%%= yeoman.dist %>/bower_components'
-
-      css:
-        expand: true
-        cwd: '<%%= yeoman.app %>/stylesheets/'
-        src: ['**/*.css']
-        dest: '<%%= yeoman.app %>/_compiled/stylesheets/'
-
-      js:
-        expand: true
-        cwd: '<%%= yeoman.app %>/javascripts/'
-        src: ['**/*.js']
-        dest: '<%%= yeoman.app %>/_compiled/javascripts/'
-
-    clean:
-      dist:
-        dot: true
-        src: [
-          '.tmp'
-          '<%%= yeoman.dist %>/*'
-          '!<%%= yeoman.dist %>/.git*'
-        ]
-
-      dev:
-        dot: true
-        src: [
-          '<%%= yeoman.app %>/_compiled/javascripts'
-          '<%%= yeoman.app %>/_compiled/stylesheets'
-        ]
-
-      tmp:
-        dot: true
-        src: [
-          '.tmp'
-        ]
-
-    rev:
-      dist:
-        files:
-          src: [
-            '<%%= yeoman.dist %>/stylesheets/{,*/}*.css'
-            '<%%= yeoman.dist %>/javascripts/{,*/}*.js'
-          ]
 
     useminPrepare:
       html: '<%%= yeoman.app %>/<%%= yeoman.wrapper %>'
@@ -163,18 +86,119 @@ module.exports = (grunt) ->
         dest: '<%%= yeoman.dist %>'
         root: '<%%= yeoman.app %>'
 
-    concat: {}
+    copy:
+      dist:
+        expand: true
+        dot: true
+        cwd: '<%%= yeoman.app %>'
+        dest: '<%%= yeoman.dist %>'
+        src: [
+          '**'
+          '!**/stylesheets/**'
+          '!**/javascripts/**'
+          '!**/bower_components/**'
+          '!**/.tmp/**'
+        ]
 
-    uglify:
+      js:
+        expand: true
+        cwd: '<%%= yeoman.app %>/javascripts/'
+        src: ['**/*.js']
+        dest: '<%%= yeoman.app %>/.tmp/javascripts/'
+
       requirejs:
-        files:
-          '<%%= yeoman.dist %>/bower_components/requirejs/require.js': ['<%%= yeoman.dist %>/bower_components/requirejs/require.js']
+        expand: true
+        cwd: '<%%= yeoman.app %>/bower_components'
+        src: ['requirejs/require.js']
+        dest: '<%%= yeoman.dist %>/bower_components'
 
     usemin:
       html: ['<%%= yeoman.dist %>/<%%= yeoman.wrapper %>']
       css: ['<%%= yeoman.dist %>/stylesheets/{,*/}*.css']
       options:
         assetsDirs: '<%%= yeoman.dist %>'
+
+    requirejs:
+      compile:
+        options:
+          baseUrl: "<%%= yeoman.app %>/.tmp/javascripts"
+          mainConfigFile: "<%%= yeoman.app %>/.tmp/javascripts/config.js"
+          dir: '<%%= yeoman.dist %>/javascripts'
+          modules: [{ name: 'main' }]
+          removeCombined: true
+
+    rev:
+      dist:
+        files:
+          src: [
+            '<%%= yeoman.dist %>/stylesheets/{,*/}*.css'
+            '<%%= yeoman.dist %>/javascripts/{,*/}*.js'
+            '<%%= yeoman.dist %>/images/{,*/}*.{gif,jpeg,jpg,png,svg,webp}'
+          ]
+
+    clean:
+      dist:
+        dot: true
+        src: [
+          '.tmp'
+          '<%%= yeoman.dist %>/*'
+        ]
+
+      dev:
+        dot: true
+        src: [
+          '<%%= yeoman.app %>/.tmp'
+        ]
+
+    imagemin:
+      dist:
+        expand: true
+        cwd: '<%%= yeoman.dist %>/images'
+        src: '{,*/}*.{gif,jpeg,jpg,png}'
+        dest: '<%%= yeoman.dist %>/images'
+
+    svgmin:
+      dist:
+        expand: true
+        cwd: '<%%= yeoman.dist %>/images'
+        src: '{,*/}*.svg'
+        dest: '<%%= yeoman.dist %>/images'
+
+    uglify:
+      requirejs:
+        files:
+          '<%%= yeoman.dist %>/bower_components/requirejs/require.js': ['<%%= yeoman.dist %>/bower_components/requirejs/require.js']
+
+    handlebars:
+      compile:
+        options:
+          namespace: 'Templates'
+          amd: true
+        files:
+          '<%%= yeoman.app %>/.tmp/javascripts/templates/templates.js': ['<%%= yeoman.app %>/javascripts/templates/{,*/}*.hbs']
+
+    modernizr:
+      devFile: '<%%= yeoman.app %>/bower_components/modernizr/modernizr.js'
+      outputFile: '<%%= yeoman.dist %>/bower_components/modernizr/modernizr.js'
+      files: [
+        '<%%= yeoman.dist %>/stylesheets/{,*/}*.css'
+        '<%%= yeoman.dist %>/javascripts/{,*/}*.js'
+      ]
+      uglify: true
+
+    replace:
+      dist:
+        options:
+          patterns: [
+            match: '/\/.tmp\/javascripts\//g'
+            replacement: '/javascripts/'
+            expression: true
+          ]
+        files: [
+          expand: true
+          src: '<%%= yeoman.dist %>/<%%= yeoman.wrapper %>'
+          dest: '.'
+        ]
 
     notify:
       scss:
@@ -188,84 +212,37 @@ module.exports = (grunt) ->
       handlebars:
         options:
           title: 'Handlebars compiled'
-          message: 'Grunt successfully compiled your Handlebar files'
+          message: 'Grunt successfully compiled your Handlebars files'
       dist:
         options:
           title: "Build complete"
           message: "Grunt successfully compiled your build in /<%%= yeoman.dist %>/"
 
-    handlebars:
-      compile:
-        options:
-          namespace: 'Templates'
-          amd: true
-        files:
-          '<%%= yeoman.app %>/_compiled/javascripts/templates/templates.js': ['<%%= yeoman.app %>/javascripts/templates/{,*/}*.hbs']
-
-    requirejs:
-      compile:
-        options:
-          baseUrl: "<%%= yeoman.app %>/_compiled/javascripts"
-          mainConfigFile: "<%%= yeoman.app %>/_compiled/javascripts/config.js"
-          dir: '<%%= yeoman.dist %>/javascripts'
-          modules: [{ name: 'main' }]
-          removeCombined: true
-
-    replace:
-      dist:
-        options:
-          patterns: [
-            match: '/\/_compiled\/javascripts\//g'
-            replacement: '/javascripts/'
-            expression: true
-          ]
-        files: [
-          expand: true
-          src: '<%%= yeoman.dist %>/<%%= yeoman.wrapper %>'
-          dest: '.'
-        ]
-
-    modernizr:
-      devFile: '<%%= yeoman.app %>/bower_components/modernizr/modernizr.js'
-      outputFile: '<%%= yeoman.dist %>/bower_components/modernizr/modernizr.js'
-      files: [
-        '<%%= yeoman.dist %>/javascripts/{,*/}*.js'
-        '<%%= yeoman.dist %>/stylesheets/{,*/}*.css'
-      ]
-
-  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
-
-  grunt.registerTask "build", [
-    "clean:dist"
+  grunt.registerTask "default", [
     "clean:dev"
-    "copy:css"
     "copy:js"
-    "useminPrepare"
     "compass:dist"
     "coffee"
     "handlebars"
+    "concurrent:dev"
+  ]
+
+  grunt.registerTask "build", [
+    "clean:dist"
+    "compass:dist"
+    "coffee:dist"
+    "handlebars"
+    "useminPrepare"
     "concat"
     "cssmin"
     "copy:dist"
-    "imagemin"
-    "svgmin"
     "requirejs"
     "copy:requirejs"
     "uglify"
     "replace:dist"
+    "concurrent:dist"
     "modernizr"
     "rev"
     "usemin"
-    "clean:tmp"
     "notify:dist"
-  ]
-
-  grunt.registerTask "default", [
-    "clean:dev"
-    "copy:css"
-    "copy:js"
-    "compass:dist"
-    "coffee"
-    "handlebars"
-    "concurrent"
   ]
