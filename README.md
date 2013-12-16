@@ -83,6 +83,7 @@ This is the compiled version of your web project. You deploy this, and only this
 - `package.json`: A list of dependencies for the Grunt tasks.
 
 ## Release History
+* 2013-12-11 - v1.3.1 - Update time-grunt
 * 2013-12-11 - v1.3.0 - Rewrite Grunt tasks for efficiency
 * 2013-12-11 - v1.2.7 - Add custom Modernizr generator
 * 2013-11-14 - v1.2.6 - Change Compass dist action to recompile from scratch
