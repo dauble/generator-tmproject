@@ -200,6 +200,9 @@ module.exports = (grunt) ->
           dest: '.'
         ]
 
+    casperjs:
+      files: 'test/{,*/}*.{coffee,js}'
+
     notify:
       scss:
         options:
@@ -245,4 +248,8 @@ module.exports = (grunt) ->
     "rev"
     "usemin"
     "notify:dist"
+  ]
+
+  grunt.registerTask "test", [
+    "casperjs"
   ]
