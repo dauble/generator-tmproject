@@ -3,9 +3,12 @@ define (require) ->
     $ = require 'jquery'
     MyModule = require 'modules/MyModule'
 
-    start = ->
-        myModule = new MyModule()
+    class App
 
-        console.log 'created: MyModule'
+        constructor: ->
 
-    start: start
+            myModule = new MyModule()
+
+            console.log 'created: MyModule'
+
+    App
