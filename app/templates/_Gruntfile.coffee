@@ -24,7 +24,7 @@ module.exports = (grunt) ->
     compass:
       options:
         sassDir: '<%%= yeoman.app %>/stylesheets'
-        cssDir: '<%%= yeoman.app %>/.tmp/stylesheets'
+        cssDir: '<%%= yeoman.app %>/_tmp/stylesheets'
         require: 'breakpoint'
       dev:
         options:
@@ -38,7 +38,7 @@ module.exports = (grunt) ->
         expand: true
         cwd: '<%%= yeoman.app %>/javascripts'
         src: '{,*/}*.coffee'
-        dest: '<%%= yeoman.app %>/.tmp/javascripts'
+        dest: '<%%= yeoman.app %>/_tmp/javascripts'
         ext: '.js'
 
     watch:
@@ -75,8 +75,8 @@ module.exports = (grunt) ->
           livereload: true
           spawn: false
         files: [
-          '<%%= yeoman.app %>/.tmp/stylesheets/{,*/}*.css'
-          '<%%= yeoman.app %>/.tmp/javascripts/{,*/}*.js'
+          '<%%= yeoman.app %>/_tmp/stylesheets/{,*/}*.css'
+          '<%%= yeoman.app %>/_tmp/javascripts/{,*/}*.js'
           '<%%= yeoman.app %>/images/{,*/}*.{gif,jpeg,jpg,png,svg,webp}'
         ]
 
@@ -97,14 +97,14 @@ module.exports = (grunt) ->
           '!**/stylesheets/**'
           '!**/javascripts/**'
           '!**/bower_components/**'
-          '!**/.tmp/**'
+          '!**/_tmp/**'
         ]
 
       js:
         expand: true
         cwd: '<%%= yeoman.app %>/javascripts/'
         src: ['**/*.js']
-        dest: '<%%= yeoman.app %>/.tmp/javascripts/'
+        dest: '<%%= yeoman.app %>/_tmp/javascripts/'
 
       requirejs:
         expand: true
@@ -121,8 +121,8 @@ module.exports = (grunt) ->
     requirejs:
       compile:
         options:
-          baseUrl: "<%%= yeoman.app %>/.tmp/javascripts"
-          mainConfigFile: "<%%= yeoman.app %>/.tmp/javascripts/config.js"
+          baseUrl: "<%%= yeoman.app %>/_tmp/javascripts"
+          mainConfigFile: "<%%= yeoman.app %>/_tmp/javascripts/config.js"
           dir: '<%%= yeoman.dist %>/javascripts'
           modules: [{ name: 'main' }]
           removeCombined: true
@@ -140,14 +140,14 @@ module.exports = (grunt) ->
       dist:
         dot: true
         src: [
-          '.tmp'
+          '_tmp'
           '<%%= yeoman.dist %>/*'
         ]
 
       dev:
         dot: true
         src: [
-          '<%%= yeoman.app %>/.tmp'
+          '<%%= yeoman.app %>/_tmp'
         ]
 
     imagemin:
@@ -175,7 +175,7 @@ module.exports = (grunt) ->
           namespace: 'Templates'
           amd: true
         files:
-          '<%%= yeoman.app %>/.tmp/javascripts/templates/templates.js': ['<%%= yeoman.app %>/javascripts/templates/{,*/}*.hbs']
+          '<%%= yeoman.app %>/_tmp/javascripts/templates/templates.js': ['<%%= yeoman.app %>/javascripts/templates/{,*/}*.hbs']
 
     modernizr:
       devFile: '<%%= yeoman.app %>/bower_components/modernizr/modernizr.js'
@@ -190,7 +190,7 @@ module.exports = (grunt) ->
       dist:
         options:
           patterns: [
-            match: '/\/.tmp\/javascripts\//g'
+            match: '/\/_tmp\/javascripts\//g'
             replacement: '/javascripts/'
             expression: true
           ]
