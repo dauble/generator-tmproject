@@ -11,7 +11,7 @@
 *.sass-cache
 node_modules/
 .tmp/
-bower_components/
+app/bower_components/
 
 # OS or Editor folders
 .DS_Store
