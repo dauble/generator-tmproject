@@ -33,9 +33,9 @@ dwsync.xml
 **/system/expressionengine/cache/**<% } else if (projectTypeCraft) { %># Cache folders
 **/craft/storage/**<% } %>
 
-<% if (projectTypeEE) || (projectTypeCraft) { %># Uploads
-**/uploads/**<% } %>
+<% if (projectTypeEE || projectTypeCraft) { %># Uploads
+**/uploads/**<% } %><% if (projectTypeEE) { %>
 
-<% if (projectTypeEE) { %># Image resize folders
+# Image resize folders
 **/images/sized/**
 **/images/made/**<% } %>

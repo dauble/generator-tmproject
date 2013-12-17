@@ -489,7 +489,6 @@ AddCharset utf-8 .atom .css .js .json .rss .vtt .xml
 </IfModule>
 
 <% if (projectTypeEE) { %>
-
 # ----------------------------------------------------------------------
 # Remove index.php from URLs
 # ----------------------------------------------------------------------
@@ -501,10 +500,7 @@ AddCharset utf-8 .atom .css .js .json .rss .vtt .xml
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^(.*)$ /index.php/$1 [L]
-</IfModule>
-
-<% } else if (projectTypeCraft) { %>
-
+</IfModule><% } else if (projectTypeCraft) { %>
 # ----------------------------------------------------------------------
 # Remove index.php from URLs
 # ----------------------------------------------------------------------
@@ -516,6 +512,4 @@ AddCharset utf-8 .atom .css .js .json .rss .vtt .xml
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_URI} !^/(favicon\.ico|apple-touch-icon.*\.png)$ [NC]
   RewriteRule (.+) index.php?p=$1 [QSA,L]
-</IfModule>
-
-<% } %>
+</IfModule><% } %>

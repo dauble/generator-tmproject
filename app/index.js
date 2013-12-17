@@ -88,7 +88,7 @@ TmprojectGenerator.prototype.app = function app() {
     this.copy('_index.html', 'app/templates/default_site/site.group/index.html');
   }
 
-  if (this.projectTypeCraft) || (this.projectTypeEE) {
+  if (this.projectTypeCraft || this.projectTypeEE) {
     this.mkdir('app/uploads')
   }
 
@@ -102,5 +102,5 @@ TmprojectGenerator.prototype.app = function app() {
 };
 
 TmprojectGenerator.prototype.projectfiles = function projectfiles() {
-  this.copy('gitignore', '.gitignore');
+  this.copy('_gitignore', '.gitignore');
 };
