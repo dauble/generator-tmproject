@@ -547,9 +547,6 @@ FileETag None
     ExpiresActive on
     ExpiresDefault                                      "access plus 1 month"
 
-  # CSS
-    ExpiresByType text/css                              "access plus 1 year"
-
   # Data interchange
     ExpiresByType application/json                      "access plus 0 seconds"
     ExpiresByType application/xml                       "access plus 0 seconds"
@@ -563,9 +560,6 @@ FileETag None
 
   # HTML
     ExpiresByType text/html                             "access plus 0 seconds"
-
-  # JavaScript
-    ExpiresByType application/javascript                "access plus 1 year"
 
   # Manifest files
     ExpiresByType application/x-web-app-manifest+json   "access plus 0 seconds"
@@ -645,29 +639,3 @@ FileETag None
 # <IfModule mod_headers.c>
 #    Header set Connection Keep-Alive
 # </IfModule>
-
-<% if (projectTypeEE) { %>
-# ----------------------------------------------------------------------
-# Remove index.php from URLs
-# ----------------------------------------------------------------------
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-
-  # Removes index.php from ExpressionEngine URLs
-  RewriteCond $1 !\.(gif|jpe?g|png)$ [NC]
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^(.*)$ /index.php/$1 [L]
-</IfModule><% } else if (projectTypeCraft) { %>
-# ----------------------------------------------------------------------
-# Remove index.php from URLs
-# ----------------------------------------------------------------------
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-
-  # Send would-be 404 requests to Craft
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_URI} !^/(favicon\.ico|apple-touch-icon.*\.png)$ [NC]
-  RewriteRule (.+) index.php?p=$1 [QSA,L]
-</IfModule><% } %>
