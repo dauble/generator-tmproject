@@ -83,6 +83,7 @@ This is the compiled version of your web project. You deploy this, and only this
 - `package.json`: A list of dependencies for the Grunt tasks.
 
 ## Release History
+* 2013-12-17 - v1.3.4 - Add conditional gitignore
 * 2013-12-17 - v1.3.3 - Fix .tmp directories not being accessible from web
 * 2013-12-17 - v1.3.2 - Add CasperJS test library for [BDD](http://en.wikipedia.org/wiki/Behavior-driven_development)
 * 2013-12-16 - v1.3.1 - Update time-grunt

@@ -28,3 +28,14 @@ nbproject
 .komodotools
 _notes
 dwsync.xml
+
+<% if (projectTypeEE) { %># Cache folders
+**/system/expressionengine/cache/**<% } else if (projectTypeCraft) { %># Cache folders
+**/craft/storage/**<% } %>
+
+<% if (projectTypeEE) || (projectTypeCraft) { %># Uploads
+**/uploads/**<% } %>
+
+<% if (projectTypeEE) { %># Image resize folders
+**/images/sized/**
+**/images/made/**<% } %>

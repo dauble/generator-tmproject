@@ -88,6 +88,10 @@ TmprojectGenerator.prototype.app = function app() {
     this.copy('_index.html', 'app/templates/default_site/site.group/index.html');
   }
 
+  if (this.projectTypeCraft) || (this.projectTypeEE) {
+    this.mkdir('app/uploads')
+  }
+
   // Assets
   this.directory('stylesheets', 'app/stylesheets');
   this.directory('javascripts', 'app/javascripts');
