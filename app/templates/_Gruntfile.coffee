@@ -122,7 +122,7 @@ module.exports = (grunt) ->
       compile:
         options:
           baseUrl: "<%%= yeoman.app %>/_tmp/javascripts"
-          mainConfigFile: "<%%= yeoman.app %>/_tmp/javascripts/config.js"
+          mainConfigFile: "<%%= yeoman.app %>/_tmp/javascripts/main.js"
           dir: '<%%= yeoman.dist %>/javascripts'
           modules: [{ name: 'main' }]
           removeCombined: true
