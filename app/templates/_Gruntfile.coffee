@@ -9,7 +9,13 @@ module.exports = (grunt) ->
       dist: 'dist'<% if (projectTypeEE) { %>
       wrapper: 'templates/default_site/{,*/}*.html'<% } else if (projectTypeCraft) { %>
       wrapper: 'craft/templates/{,*/}*.html'<% } else { %>
-      wrapper: '{,*/}*.html'<% } %>
+      wrapper: '{,*/}*.html'<% } %><% if (projectTypeEE) { %>
+      cache: [
+        '!**/system/expressionengine/cache/**'
+      ]<% } else if (projectTypeCraft) { %>
+      cache: [
+        '!**/craft/storage/**'
+      ]<% } %>
 
     concurrent:
       dev: [
@@ -98,6 +104,7 @@ module.exports = (grunt) ->
           '!**/javascripts/**'
           '!**/bower_components/**'
           '!**/_tmp/**'
+          '<%= yeoman.cache %>'
         ]
 
       js:
@@ -203,6 +210,18 @@ module.exports = (grunt) ->
     casperjs:
       files: 'test/{,*/}*.{coffee,js}'
 
+    shell:
+      cache:
+        command: ->
+          folders = @.config.data.yeoman.cache
+          commands = for index, folder of folders
+            pattern = /\*|\!|\/$|\/\*\*/g;
+            folder = folder.replace(pattern, '');
+            "mkdir -p <%= yeoman.dist %>/" + folder + "&& chmod 777 <%= yeoman.dist %>/" + folder
+          commands.join ' && '
+        options:
+          stdout: true
+
     notify:
       scss:
         options:
@@ -247,6 +266,7 @@ module.exports = (grunt) ->
     "modernizr"
     "rev"
     "usemin"
+    "shell"
     "notify:dist"
   ]
 
