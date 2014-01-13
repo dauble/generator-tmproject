@@ -83,6 +83,7 @@ This is the compiled version of your web project. You deploy this, and only this
 - `package.json`: A list of dependencies for the Grunt tasks.
 
 ## Release History
+* 2013-12-17 - v1.4.0 - Use Sass instead of Compass because Sass is much faster
 * 2013-12-17 - v1.3.5 - Optimize RequireJS scripts
 * 2013-12-17 - v1.3.4 - Add conditional gitignore
 * 2013-12-17 - v1.3.3 - Fix .tmp directories not being accessible from web

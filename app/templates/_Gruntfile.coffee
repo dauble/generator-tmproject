@@ -12,26 +12,27 @@ module.exports = (grunt) ->
       wrapper: '{,*/}*.html'<% } %>
 
     concurrent:
-      dev: [
-        'watch'
-        'compass:dev'
-      ]
       dist: [
         'imagemin'
         'svgmin'
       ]
 
-    compass:
-      options:
-        sassDir: '<%%= yeoman.app %>/stylesheets'
-        cssDir: '<%%= yeoman.app %>/_tmp/stylesheets'
-        require: 'breakpoint'
-      dev:
-        options:
-          watch: true
+    autoprefixer:
+      dist:
+        src: '<%%= yeoman.app %>/_tmp/stylesheets/styles.css'
+
+    sass:
       dist:
         options:
-          force: true
+          outputStyle: 'compressed'
+        files:
+          '<%%= yeoman.app %>/_tmp/stylesheets/styles.css': '<%%= yeoman.app %>/stylesheets/styles.scss'
+      dev:
+        options:
+          outputStyle: 'expanded'
+          sourceComments: 'normal'
+        files:
+          '<%%= yeoman.app %>/_tmp/stylesheets/styles.css': '<%%= yeoman.app %>/stylesheets/styles.scss'
 
     coffee:
       dist:
@@ -46,7 +47,7 @@ module.exports = (grunt) ->
         options:
           spawn: false
         files: ['<%%= yeoman.app %>/stylesheets/{,*/}*.scss']
-        tasks: ['notify:scss']
+        tasks: ['sass:dev', 'autoprefixer', 'notify:scss']
 
       coffee:
         options:
@@ -224,15 +225,17 @@ module.exports = (grunt) ->
   grunt.registerTask "default", [
     "clean:dev"
     "copy:js"
-    "compass:dist"
+    "sass:dev"
+    "autoprefixer"
     "coffee"
     "handlebars"
-    "concurrent:dev"
+    "watch"
   ]
 
   grunt.registerTask "build", [
     "clean:dist"
-    "compass:dist"
+    "sass:dist"
+    "autoprefixer"
     "coffee:dist"
     "handlebars"
     "useminPrepare"

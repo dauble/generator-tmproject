@@ -2,13 +2,12 @@
 // Styles
 //
 // This is where all of the stylesheets are compiled. They are
-//  processed in order of @import.
+//  processed in the order they are imported.
 // ====================================================================
-@import "compass";
-@import "breakpoint";
 
 // Base
 // ====================================================================
+@import "base/mixins";
 @import "base/base";
 @import "base/layout";
 @import "base/typography";
