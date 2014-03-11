@@ -8,7 +8,7 @@ define (require) ->
 
         constructor: ->
 
-            @template = Templates['app/javascripts/templates/myModule.hbs']
+            @template = Templates['app/assets/javascripts/templates/myModule.hbs']
 
             $('body').append @template()
 

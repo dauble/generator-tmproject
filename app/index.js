@@ -93,9 +93,9 @@ TmprojectGenerator.prototype.app = function app() {
   }
 
   // Assets
-  this.directory('stylesheets', 'app/stylesheets');
-  this.directory('javascripts', 'app/javascripts');
-  this.mkdir('app/images');
+  this.directory('stylesheets', 'app/assets/stylesheets');
+  this.directory('javascripts', 'app/assets/javascripts');
+  this.mkdir('app/assets/images');
 
   // Tests
   this.directory('test')

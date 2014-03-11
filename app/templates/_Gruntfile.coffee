@@ -26,18 +26,18 @@ module.exports = (grunt) ->
         options:
           outputStyle: 'compressed'
         files:
-          '<%%= yeoman.app %>/_tmp/stylesheets/styles.css': '<%%= yeoman.app %>/stylesheets/styles.scss'
+          '<%%= yeoman.app %>/_tmp/stylesheets/styles.css': '<%%= yeoman.app %>/assets/stylesheets/styles.scss'
       dev:
         options:
           outputStyle: 'expanded'
           sourceComments: 'normal'
         files:
-          '<%%= yeoman.app %>/_tmp/stylesheets/styles.css': '<%%= yeoman.app %>/stylesheets/styles.scss'
+          '<%%= yeoman.app %>/_tmp/stylesheets/styles.css': '<%%= yeoman.app %>/assets/stylesheets/styles.scss'
 
     coffee:
       dist:
         expand: true
-        cwd: '<%%= yeoman.app %>/javascripts'
+        cwd: '<%%= yeoman.app %>/assets/javascripts'
         src: '{,*/}*.coffee'
         dest: '<%%= yeoman.app %>/_tmp/javascripts'
         ext: '.js'
@@ -46,26 +46,26 @@ module.exports = (grunt) ->
       scss:
         options:
           spawn: false
-        files: ['<%%= yeoman.app %>/stylesheets/{,*/}*.scss']
+        files: ['<%%= yeoman.app %>/assets/stylesheets/{,*/}*.scss']
         tasks: ['sass:dev', 'autoprefixer', 'notify:scss']
 
       coffee:
         options:
             spawn: false
-          files: ['<%%= yeoman.app %>/javascripts/{,*/}*.coffee']
+          files: ['<%%= yeoman.app %>/assets/javascripts/{,*/}*.coffee']
           tasks: [
             'coffee:dist'
             'notify:coffee'
           ]
 
       js:
-        files: ['<%%= yeoman.app %>/javascripts/{,*/}*.js']
+        files: ['<%%= yeoman.app %>/assets/javascripts/{,*/}*.js']
         tasks: ['copy:js']
 
       handlebars:
         options:
           spawn: false
-        files: ['<%%= yeoman.app %>/javascripts/templates/{,*/}*.hbs']
+        files: ['<%%= yeoman.app %>/assets/javascripts/templates/{,*/}*.hbs']
         tasks: [
           'handlebars'
           'notify:handlebars'
@@ -78,7 +78,7 @@ module.exports = (grunt) ->
         files: [
           '<%%= yeoman.app %>/_tmp/stylesheets/{,*/}*.css'
           '<%%= yeoman.app %>/_tmp/javascripts/{,*/}*.js'
-          '<%%= yeoman.app %>/images/{,*/}*.{gif,jpeg,jpg,png,svg,webp}'
+          '<%%= yeoman.app %>/assets/images/{,*/}*.{gif,jpeg,jpg,png,svg,webp}'
         ]
 
     useminPrepare:
@@ -95,15 +95,15 @@ module.exports = (grunt) ->
         dest: '<%%= yeoman.dist %>'
         src: [
           '**'
-          '!**/stylesheets/**'
-          '!**/javascripts/**'
+          '!**/assets/stylesheets/**'
+          '!**/assets/javascripts/**'
           '!**/bower_components/**'
           '!**/_tmp/**'
         ]
 
       js:
         expand: true
-        cwd: '<%%= yeoman.app %>/javascripts/'
+        cwd: '<%%= yeoman.app %>/assets/javascripts/'
         src: ['**/*.js']
         dest: '<%%= yeoman.app %>/_tmp/javascripts/'
 
@@ -115,7 +115,7 @@ module.exports = (grunt) ->
 
     usemin:
       html: ['<%%= yeoman.dist %>/<%%= yeoman.wrapper %>']
-      css: ['<%%= yeoman.dist %>/stylesheets/{,*/}*.css']
+      css: ['<%%= yeoman.dist %>/assets/stylesheets/{,*/}*.css']
       options:
         assetsDirs: '<%%= yeoman.dist %>'
 
@@ -124,7 +124,7 @@ module.exports = (grunt) ->
         options:
           baseUrl: "<%%= yeoman.app %>/_tmp/javascripts"
           mainConfigFile: "<%%= yeoman.app %>/_tmp/javascripts/main.js"
-          dir: '<%%= yeoman.dist %>/javascripts'
+          dir: '<%%= yeoman.dist %>/assets/javascripts'
           modules: [{ name: 'main' }]
           removeCombined: true
 
@@ -132,9 +132,9 @@ module.exports = (grunt) ->
       dist:
         files:
           src: [
-            '<%%= yeoman.dist %>/stylesheets/{,*/}*.css'
-            '<%%= yeoman.dist %>/javascripts/{,*/}*.js'
-            '<%%= yeoman.dist %>/images/{,*/}*.{gif,jpeg,jpg,png,svg,webp}'
+            '<%%= yeoman.dist %>/assets/stylesheets/{,*/}*.css'
+            '<%%= yeoman.dist %>/assets/javascripts/{,*/}*.js'
+            '<%%= yeoman.dist %>/assets/images/{,*/}*.{gif,jpeg,jpg,png,svg,webp}'
           ]
 
     clean:
@@ -154,16 +154,16 @@ module.exports = (grunt) ->
     imagemin:
       dist:
         expand: true
-        cwd: '<%%= yeoman.dist %>/images'
+        cwd: '<%%= yeoman.dist %>/assets/images'
         src: '{,*/}*.{gif,jpeg,jpg,png}'
-        dest: '<%%= yeoman.dist %>/images'
+        dest: '<%%= yeoman.dist %>/assets/images'
 
     svgmin:
       dist:
         expand: true
-        cwd: '<%%= yeoman.dist %>/images'
+        cwd: '<%%= yeoman.dist %>/assets/images'
         src: '{,*/}*.svg'
-        dest: '<%%= yeoman.dist %>/images'
+        dest: '<%%= yeoman.dist %>/assets/images'
 
     uglify:
       requirejs:
@@ -176,14 +176,14 @@ module.exports = (grunt) ->
           namespace: 'Templates'
           amd: true
         files:
-          '<%%= yeoman.app %>/_tmp/javascripts/templates/templates.js': ['<%%= yeoman.app %>/javascripts/templates/{,*/}*.hbs']
+          '<%%= yeoman.app %>/_tmp/javascripts/templates/templates.js': ['<%%= yeoman.app %>/assets/javascripts/templates/{,*/}*.hbs']
 
     modernizr:
       devFile: '<%%= yeoman.app %>/bower_components/modernizr/modernizr.js'
       outputFile: '<%%= yeoman.dist %>/bower_components/modernizr/modernizr.js'
       files: [
-        '<%%= yeoman.dist %>/stylesheets/{,*/}*.css'
-        '<%%= yeoman.dist %>/javascripts/{,*/}*.js'
+        '<%%= yeoman.dist %>/assets/stylesheets/{,*/}*.css'
+        '<%%= yeoman.dist %>/assets/javascripts/{,*/}*.js'
       ]
       uglify: true
 
@@ -192,7 +192,7 @@ module.exports = (grunt) ->
         options:
           patterns: [
             match: '/\/_tmp\/javascripts\//g'
-            replacement: '/javascripts/'
+            replacement: '/assets/javascripts/'
             expression: true
           ]
         files: [
