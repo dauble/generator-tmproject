@@ -34,13 +34,12 @@ module.exports = (grunt) ->
         files:
           '<%%= yeoman.app %>/_tmp/stylesheets/styles.css': '<%%= yeoman.app %>/assets/stylesheets/styles.scss'
 
-    coffee:
+    browserify:
       dist:
-        expand: true
-        cwd: '<%%= yeoman.app %>/assets/javascripts'
-        src: '{,*/}*.coffee'
-        dest: '<%%= yeoman.app %>/_tmp/javascripts'
-        ext: '.js'
+        files:
+          '<%%= yeoman.app %>/_tmp/javascripts/bundle.js': ['<%%= yeoman.app %>/assets/javascripts/{,*/}*.js', '<%%= yeoman.app %>/assets/javascripts/{,*/}*.coffee']
+        options:
+          transform: ['browserify-handlebars', 'coffeeify']
 
     watch:
       scss:
@@ -54,7 +53,7 @@ module.exports = (grunt) ->
             spawn: false
           files: ['<%%= yeoman.app %>/assets/javascripts/{,*/}*.coffee']
           tasks: [
-            'coffee:dist'
+            'browserify:dist'
             'notify:coffee'
           ]
 
@@ -67,8 +66,8 @@ module.exports = (grunt) ->
           spawn: false
         files: ['<%%= yeoman.app %>/assets/javascripts/templates/{,*/}*.hbs']
         tasks: [
-          'handlebars'
-          'notify:handlebars'
+          'browserify:dist'
+          'notify:coffee'
         ]
 
       livereload:
@@ -107,26 +106,11 @@ module.exports = (grunt) ->
         src: ['**/*.js']
         dest: '<%%= yeoman.app %>/_tmp/javascripts/'
 
-      requirejs:
-        expand: true
-        cwd: '<%%= yeoman.app %>/bower_components'
-        src: ['requirejs/require.js']
-        dest: '<%%= yeoman.dist %>/bower_components'
-
     usemin:
       html: ['<%%= yeoman.dist %>/<%%= yeoman.wrapper %>']
       css: ['<%%= yeoman.dist %>/assets/stylesheets/{,*/}*.css']
       options:
         assetsDirs: '<%%= yeoman.dist %>'
-
-    requirejs:
-      compile:
-        options:
-          baseUrl: "<%%= yeoman.app %>/_tmp/javascripts"
-          mainConfigFile: "<%%= yeoman.app %>/_tmp/javascripts/main.js"
-          dir: '<%%= yeoman.dist %>/assets/javascripts'
-          modules: [{ name: 'main' }]
-          removeCombined: true
 
     rev:
       dist:
@@ -165,19 +149,6 @@ module.exports = (grunt) ->
         src: '{,*/}*.svg'
         dest: '<%%= yeoman.dist %>/assets/images'
 
-    uglify:
-      requirejs:
-        files:
-          '<%%= yeoman.dist %>/bower_components/requirejs/require.js': ['<%%= yeoman.dist %>/bower_components/requirejs/require.js']
-
-    handlebars:
-      compile:
-        options:
-          namespace: 'Templates'
-          amd: true
-        files:
-          '<%%= yeoman.app %>/_tmp/javascripts/templates/templates.js': ['<%%= yeoman.app %>/assets/javascripts/templates/{,*/}*.hbs']
-
     modernizr:
       devFile: '<%%= yeoman.app %>/bower_components/modernizr/modernizr.js'
       outputFile: '<%%= yeoman.dist %>/bower_components/modernizr/modernizr.js'
@@ -186,23 +157,6 @@ module.exports = (grunt) ->
         '<%%= yeoman.dist %>/assets/javascripts/{,*/}*.js'
       ]
       uglify: true
-
-    replace:
-      dist:
-        options:
-          patterns: [
-            match: '/\/_tmp\/javascripts\//g'
-            replacement: '/assets/javascripts/'
-            expression: true
-          ]
-        files: [
-          expand: true
-          src: '<%%= yeoman.dist %>/<%%= yeoman.wrapper %>'
-          dest: '.'
-        ]
-
-    casperjs:
-      files: 'test/{,*/}*.{coffee,js}'
 
     notify:
       scss:
@@ -227,8 +181,7 @@ module.exports = (grunt) ->
     "copy:js"
     "sass:dev"
     "autoprefixer"
-    "coffee"
-    "handlebars"
+    "browserify"
     "watch"
   ]
 
@@ -236,23 +189,15 @@ module.exports = (grunt) ->
     "clean:dist"
     "sass:dist"
     "autoprefixer"
-    "coffee:dist"
-    "handlebars"
+    "browserify:dist"
     "useminPrepare"
     "concat"
     "cssmin"
     "copy:dist"
-    "requirejs"
-    "copy:requirejs"
     "uglify"
-    "replace:dist"
     "concurrent:dist"
     "modernizr"
     "rev"
     "usemin"
     "notify:dist"
-  ]
-
-  grunt.registerTask "test", [
-    "casperjs"
   ]
