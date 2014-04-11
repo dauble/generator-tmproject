@@ -1,18 +1,14 @@
+$ = require 'jquery'
+Template = require '../templates/myModule.hbs'
 
-define (require) ->
+class MyModule
 
-    $ = require 'jquery'
-    Templates = require 'templates/templates'
+    constructor: ->
 
-    class MyModule
+        $('body').append Template()
 
-        constructor: ->
+        console.log 'constructor: MyModule with templates'
 
-            @template = Templates['app/assets/javascripts/templates/myModule.hbs']
+MyModule
 
-            $('body').append @template()
-
-            console.log 'constructor: MyModule with templates'
-
-
-    MyModule
+module.exports = MyModule

@@ -1,14 +1,14 @@
-define (require) ->
+$ = require 'jquery'
+MyModule = require './modules/MyModule.coffee'
 
-    $ = require 'jquery'
-    MyModule = require 'modules/MyModule'
+class App
 
-    class App
+    constructor: ->
 
-        constructor: ->
+        myModule = new MyModule()
 
-            myModule = new MyModule()
+        console.log 'created: MyModule'
 
-            console.log 'created: MyModule'
+App
 
-    App
+new App
