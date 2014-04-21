@@ -5,16 +5,16 @@
   "keywords": [
     "yeoman-tmproject"
   ],
-  "homepage": "https://github.com/aaronbushnell/generator-tmproject",
-  "bugs": "https://github.com/aaronbushnell/generator-tmproject/issues",
+  "homepage": "https://github.com/drgfunk/generator-tmproject",
+  "bugs": "https://github.com/drgfunk/generator-tmproject/issues",
   "author": {
-    "name": "Aaron Bushnell",
-    "url": "https://github.com/aaronbushnell"
+    "name": "Joshua Roof",
+    "url": "https://github.com/drgfunk"
   },
   "main": "app/index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/aaronbushnell/generator-tmproject.git"
+    "url": "git://github.com/drgfunk/generator-tmproject.git"
   },
   "scripts": {
     "test": "mocha"
