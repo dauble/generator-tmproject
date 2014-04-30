@@ -16,6 +16,10 @@ Run `$ npm install -g generator-tmproject`
 1. Create an empty directory for your project: `$ mkdir ~/Sites/my_new_project && cd $_`
 2. Run the generator: `$ yo tmproject`
 
+## Notes
+1. You should _not_ change anything in the Gruntfile except for the `wrapper` path near the top of the file. Changing the Gruntfile could lead to Very Bad Things&reg;
+2. The `wrapper` variable in the Gruntfile points to the template file that contains your usemin blocks (JS/CSS blocks that get concatenated, minified and revved in dist). If this path is incorrect your JS and CSS will _not_ be included in the final build.
+
 ## Project directories
 You will be asked a couple basic questions to start your project up. When you are done you should have a project directory that looks like this:
 
